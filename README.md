@@ -30,5 +30,17 @@ python sparate_action_data.py --dataset_name ABCD_D --sparate_mode language
 You can also download the .pkl file we have prepared. Whatever which methods, you need modify the ```dataset_wo_image_path``` path in ```config_path.json``` to the path containing the corresponding pkl files. 
 
 ### Training the Model
+After all the files mentioned are prepared and their pathes are modified in ```config_path.json```, we can train our model. Taking ABCD_D subset in CALVIN as an example, you need conduct the first-stage training by using standard language.
 
+```bash
+cd my_models/DDP_training
+python training.py --world_size 2 --training_mode first --dataset_name ABCD_D
+```
 
+It will generate a checkpoint called ```model-9-first-ABCD_D.pt``` under the ```ckpt``` folder. Then we need to conduct the second stage training like
+
+```bash
+python training.py --world_size 2 --training_mode second --dataset_name ABCD_D --checkpoint ./model-9-first-ABCD_D.pt
+```
+
+The final mode is output as ```model-4-second-ABCD_D.pt``` in ```ckpt``` folder.
