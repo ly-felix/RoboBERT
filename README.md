@@ -44,3 +44,36 @@ python training.py --world_size 2 --training_mode second --dataset_name ABCD_D -
 ```
 
 The final mode is output as ```model-4-second-ABCD_D.pt``` in ```ckpt``` folder.
+
+### Evaluating the Model
+For evaulating the model, run the ```evaluation_calvin.py``` in the main path like
+
+```bash
+cd ../..
+python evaluation_calvin.py --ckpt_path /home/wibot/SC/roboBert/my_models/DDP_training/ckpt/model-4-second-ABCD_D.pt
+```
+Of course, we also provide the pertrained model for you to evaluate.
+
+## Result
+
+### Performance for Dataset ABCD -> D
+| Method | Pretraining | 1 | 2 | 3 | 4 | 5 | Avg Len |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| HULC | N | 0.889 | 0.733 | 0.587 | 0.475 | 0.383 | 3.06 |
+| RoboFlamingo | Y | 0.964 | 0.896 | 0.824 | 0.740 | 0.660 | 4.08 |
+| DeeR | Y | 0.982 | 0.902 | 0.821 | 0.759 | 0.670 | 4.13 |
+| GR - 1 | Y | 0.949 | 0.896 | 0.844 | 0.789 | 0.731 | 4.21 |
+| MoDE(w. per.) | Y | 0.971 | 0.925 | 0.879 | 0.835 | 0.779 | 4.39 |
+| **RoboBERT(Ours)** | N | **0.988** | **0.952** | **0.911** | **0.865** | **0.809** | **4.52** |
+
+### Performance for Dataset ABC -> D
+| Method | Pretraining | 1 | 2 | 3 | 4 | 5 | Avg Len|
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| RoboFlamingo | Y | 0.824 | 0.619 | 0.466 | 0.331 | 0.235 | 2.47 |
+| DeeR | Y | 0.862 | 0.701 | 0.518 | 0.415 | 0.304 | 2.82 |
+| GR - 1 | Y | 0.854 | 0.712 | 0.596 | 0.497 | 0.401 | 3.06 |
+| 3D Diffuser Actor | N | 0.922 | 0.787 | 0.639 | 0.512 | 0.412 | 3.27 |
+| MoDE(w/o per.) | N | 0.915 | 0.792 | 0.673 | 0.558 | 0.453 | 3.39 |
+| **RoboBERT(Ours)** | N | **0.953** | **0.857** | **0.754** | **0.663** | **0.562** | **3.79** |
+
+
