@@ -34,7 +34,7 @@ conda create --name RoboBERT python=3.8
 conda activate RoboBERT
 pip install -r requirements.txt
 ```
-Then, modifing the pathes in config_path.json, replacing pathes of CALVIN and BERT as where they are in your computer.
+Then, modifing the pathes in ```config_path.json```, replacing pathes of CALVIN dataset and BERT as where they are in your computer.
 
 ### :family_man_boy: Extracting the Actions from Dataset
 Because the training reads actions data, which is not very large in total, but more frequently than image data. It can reduce the I/O frequency and extend the harddisk life if all the action data can be restored in RAM before training cycle. We have created a script sparating or extracting the actions data individually from original CALVIN dataset and restoring into a pkl file called    ```dataset_wo_image_{dataset_name}.pkl ```.
