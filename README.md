@@ -3,6 +3,22 @@ This is the official implementation of RoboBERT, which is a novel end-to-end mul
 
 ## Model Structure
 
+<div align="center">
+  <img src="assets/f1.png" width="80%"/>
+</div>
+
+<div align="center">
+  <img src="assets/augmentation.png" width="55%"/>
+</div>
+
+<div align="center">
+  <img src="assets/two-stage.png" width="55%"/>
+</div>
+
+<div align="center">
+  <img src="assets/augmentation.png" width="55%"/>
+</div>
+
 ## Usage
 Although the project and related libraries have been confirmed to run successfully on Windows, it is found that some libraries like Pyhash is difficult to compile and some performance loss for the model may also occurr on Windows, Linux is strongly recommended.
 
