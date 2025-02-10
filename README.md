@@ -11,12 +11,12 @@ The structure of the model is the combination of cross-attention and diffusion p
 For reducing the learning difficulties, the NLP task and action task will be studied in different stages. For fisrt stage like (a) in following graph, we use the simple and stable label for the same categories task like a warm-up. In the second stage like (b), we will use the completed natural language label to train.
 
 <div align="center">
-  <img src="assets/two-stage.png" width="55%"/>
+  <img src="assets/two-stage.png" width="60%"/>
 </div>
 
 The data augmentation is quite important whe using the limited data for end-to-end training. The various data augmentation techiques are employed and demonstrated as follows. (a) are common techiques for CV tasks. (b) is mixup for robotic task. It worthy noting that not all data augmentations have the positive effect to the model. 
 <div align="center">
-  <img src="assets/augmentation.png" width="55%"/>
+  <img src="assets/augmentation.png" width="65%"/>
 </div>
 
 
