@@ -1,23 +1,24 @@
 # RoboBERT
 This is the official implementation of RoboBERT, which is a novel end-to-end multiple-modality robotic operations training framework. It allows an instruction-following agent, switching the policy by natural language input. The model itself is an extension or improvement of the traditional CNN-based diffusion policy, adding some creative training methods. For examples, two-stage training separates learning of different modalities; data-augmentation reduces the reliance of extra data, etc. The training framework has been tested on changllenging CALVIN benchmark and get the SOTA comparing to models without using large pretraining or extra dataset on ABCD -> D. Additionally, it also only use the trajectories with language labels. Based on these reasons, the model is much more easily to train. The repository shows the training/testing source code for repeative experiments. If you want to learn more about this work, please check our paper. Thank you!
 
-## Model Structure
+## Model Features
 
+The structure of the model is the combination of cross-attention and diffusion policy. The BERT and ViT plays the role of preprocessing of input modalities. The resulted vectors will be amalgamated and compressed into one token by cross-attention and max pooling. The token is the denoising condition for diffusion policy.
 <div align="center">
   <img src="assets/f1.png" width="80%"/>
 </div>
 
-<div align="center">
-  <img src="assets/augmentation.png" width="55%"/>
-</div>
+For reducing the learning difficulties, the NLP task and action task will be studied in different stages. For fisrt stage like (a) in following graph, we use the simple and stable label for the same categories task like a warm-up. In the second stage like (b), we will use the completed natural language label to train.
 
 <div align="center">
   <img src="assets/two-stage.png" width="55%"/>
 </div>
 
+The data augmentation is quite important whe using the limited data for end-to-end training. The various data augmentation techiques are employed and demonstrated as follows. (a) are common techiques for CV tasks. (b) is mixup for robotic task. It worthy noting that not all data augmentations have the positive effect to the model. 
 <div align="center">
   <img src="assets/augmentation.png" width="55%"/>
 </div>
+
 
 ## Usage
 Although the project and related libraries have been confirmed to run successfully on Windows, it is found that some libraries like Pyhash is difficult to compile and some performance loss for the model may also occurr on Windows, Linux is strongly recommended.
@@ -72,6 +73,7 @@ Of course, we also provide the pertrained model for you to evaluate.
 
 ## Result
 
+The model is tested on CALVIN dataset. In the table, pretraining column means if the method uses the large pertraining foundation model like LLM or extra dataset. Our model performs the best comparing to method without pretraining, even exceeding some with it.
 ### Performance for Dataset ABCD -> D
 | Method | Pretraining | 1 | 2 | 3 | 4 | 5 | Avg Len |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -92,4 +94,10 @@ Of course, we also provide the pertrained model for you to evaluate.
 | MoDE(w/o per.) | N | 0.915 | 0.792 | 0.673 | 0.558 | 0.453 | 3.39 |
 | **RoboBERT(Ours)** | N | **0.953** | **0.857** | **0.754** | **0.663** | **0.562** | **3.79** |
 
+### Real Robot Experiments
+<div align="center">
+  <img src="assets/cabinet operations_c.gif" width="80%"/>
+</div>
+
+We have collected 25-30 trajectories for each subtasks by teleoperation and training on REALMAN rm-65b. The ISAAC SIM platform provides IK and shows the complete pose of the robotic arm, the natural language is input by keyboard. However, the switch of the all the tasks is control by human just like in CALVIN, which need improving by introduing the hight-level planining in the futture work.
 
