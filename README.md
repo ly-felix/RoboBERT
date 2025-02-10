@@ -6,8 +6,19 @@ This is the official implementation of RoboBERT, which is a novel end-to-end mul
 ## Usage
 Although the project and related libraries have been confirmed to run successfully on Windows, it is found that some libraries like Pyhash is difficult to compile and some performance loss for the model may also occurr on Windows, Linux is strongly recommended.
 
-### Downloading Dataset and Configurating Environment
-Please downloading the dataset on [CALVIN](https://github.com/mees/calvin) and BERT encoder on [BERT](https://huggingface.co/google-bert/bert-base-uncased/tree/main). Please replace the corresponding pathes in config_path.json. Note that the CALVIN path should be the upper-level directory of the "task_ABCD_D" or other datasets. You should also install all the components under three CALVIN diectories by pip install -e .
+### Downloading Dataset and Pertraining
+Please downloading the dataset on [CALVIN](https://github.com/mees/calvin) and BERT encoder on [BERT](https://huggingface.co/google-bert/bert-base-uncased/tree/main).
+
+### Cloning this Repository and Configurating Environment
+ 
+```bash
+git clone https://github.com/PeterWangsicheng/RoboBERT
+cd RoboBERT
+conda create --name RoboBERT python=3.8
+conda activate RoboBERT
+pip install -r requirements.txt
+```
+
 
 ### Extracting the Actions from Dataset
 Because the training reads actions data, which is not very large in total, more frequently than image data, it can reduce the I/O frequency and extend the harddisk life if all the action data can be restored in RAM before training cycle. We have created a script extracting the actions data individually from original CALVIN dataset and restoring into a pkl file called dataset_wo_image_{dataset_name}.pkl. 
