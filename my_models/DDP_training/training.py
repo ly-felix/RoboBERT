@@ -56,6 +56,10 @@ def train(rank, args):
     dataset_name = args.dataset_name
     checkpoint = args.checkpoint
 
+    ckpt_folder_path = "ckpt"
+    if not os.path.exists(ckpt_folder_path):
+        os.makedirs(ckpt_folder_path)
+
     if dataset_name not in {"ABC_D", "ABCD_D"}:
         raise("dataset_name error")
     
