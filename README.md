@@ -69,7 +69,7 @@ For evaulating the model, run the ```evaluation_calvin.py``` in the main path li
 cd ../..
 python evaluation_calvin.py --ckpt_path /home/wibot/SC/roboBert/my_models/DDP_training/ckpt/model-4-second-ABCD_D.pt
 ```
-Of course, we also provide the pertrained model for you to evaluate.
+Of course, we also provide the pertrained model for you to evaluate. For ABCD -> D, downloading [checkpoint](https://drive.google.com/drive/folders/1W2wtwZttrp42VWHwgd7kWOXTBmgzigsz?usp=sharing).
 
 ## :chart_with_upwards_trend: Result
 
