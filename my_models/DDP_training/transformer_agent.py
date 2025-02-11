@@ -148,7 +148,7 @@ class GPTAgent(CalvinBaseModel):
         self.rgb_gripper_queue.get()
         
         #action[0:6] = torch.round(action[0:6] * 20)/20
-        action[0:6] *= 1.0
+        action[0:6] *= 0.9
 
         return action.cpu().numpy()
 
