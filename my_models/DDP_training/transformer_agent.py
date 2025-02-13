@@ -16,7 +16,7 @@ import copy
 from diffusers.schedulers.scheduling_ddpm import DDPMScheduler
 
 class GPTAgent(CalvinBaseModel):
-    def __init__(self, checkpoint):
+    def __init__(self, checkpoint, speed_factor):
         super().__init__()
         #print("you are using deepyoloB agent")
         self.checkpoint = checkpoint
@@ -31,6 +31,7 @@ class GPTAgent(CalvinBaseModel):
         self.obs_horizon = obs_horizon
         self.action_horizon = action_horizon
         self.pred_horizon = pred_horizon
+        self.speed_factor = speed_factor
 
         # create network object
         noise_pred_net = ConditionalUnet1D(
@@ -148,7 +149,7 @@ class GPTAgent(CalvinBaseModel):
         self.rgb_gripper_queue.get()
         
         #action[0:6] = torch.round(action[0:6] * 20)/20
-        action[0:6] *= 0.9
+        action[0:6] *= self.speed_factor
 
         return action.cpu().numpy()
 
