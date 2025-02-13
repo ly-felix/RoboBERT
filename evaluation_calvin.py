@@ -38,13 +38,13 @@ def make_env(dataset_path):
     # env = Wrapper(env)
     return env
 
-def eval_one_epoch_calvin(checkpoint, dataset_path, calvin_conf_path):
+def eval_one_epoch_calvin(checkpoint, dataset_path, calvin_conf_path, speed_factor):
     env = make_env(dataset_path)
     model_type = "second"
        
     if model_type == "second":
         from my_models.DDP_training.transformer_agent import GPTAgent
-        agent_model = GPTAgent(checkpoint)
+        agent_model = GPTAgent(checkpoint, speed_factor)
         
     evaluate_policy(agent_model, env, calvin_conf_path)
 
@@ -133,9 +133,11 @@ def rollout(env, model, task_oracle, subtask, val_annotations):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='configurating the extraction specifications')
     parser.add_argument('--ckpt_path', type=str, default="path/to/ckpt")
+    parser.add_argument('--speed_factor', type=float, default=1.0)
     args = parser.parse_args()
 
     ckpt_path = args.ckpt_path
+    speed_factor = args.speed_factor
     checkpoint = torch.load(ckpt_path)
     
     loaded_config = dict()
@@ -147,4 +149,4 @@ if __name__ == "__main__":
 
     torch.manual_seed(0)
     with torch.no_grad():
-        eval_one_epoch_calvin(checkpoint, dataset_path, calvin_conf_path)
+        eval_one_epoch_calvin(checkpoint, dataset_path, calvin_conf_path, speed_factor)
