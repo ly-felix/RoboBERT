@@ -14,7 +14,7 @@ For reducing the learning difficulties, the NLP task and action task will be stu
   <img src="assets/two-stage.png" width="60%"/>
 </div>
 
-The data augmentation is quite important whe using the limited data for end-to-end training. The various data augmentation techiques are employed and demonstrated as follows. (a) are common techiques for CV tasks. (b) is mixup for robotic task. It worthy noting that not all data augmentations have the positive effect to the model like translation. In the latest experiment, Mixup is applied during the training of subset ABC_D so it don't need an explicit decerlation during evaluation. Mixup don't have an sigificant improvement for ABCD_D subset but it improve a lot for ABC_D subset and it always needs more epoches to get the best results so we don't use it for ABCD_D.
+The data augmentation is quite important whe using the limited data for end-to-end training. The various data augmentation techiques are employed and demonstrated as follows. (a) are common techiques for CV tasks. (b) is mixup for robotic task. It worthy noting that not all data augmentations have the positive effect to the model like translation. In the latest experiment, Mixup is only applied during the training of subset ABC_D because mixup don't have an evident improvement for ABCD_D subset but it improve a lot for ABC_D subset. It always needs more epoches to get the best results so we don't use it for ABCD_D.
 
 <div align="center">
   <img src="assets/augmentation.png" width="65%"/>
@@ -78,7 +78,7 @@ Of course, we also provide the pertrained model for you to evaluate. For ABCD ->
 python evaluation_calvin.py --ckpt_path /to/your/ckpt/path/model-4-second-ABCD_D-best.pt --speed_factor 0.9
 python evaluation_calvin.py --ckpt_path /to/your/ckpt/path/model-14-second-ABC_D-best.pt
 ```
-Noting that the speed factor will decerelate the motion and obtain better performance for ABCD subset. The reason should be led by the application of mixup, the distruibution of the action label has been averaged to some extent and forming a natural decerelation. 
+Noting that the speed factor will decerelate the motion and obtain better performance for ABCD subset. The reason should be led by the application of mixup, the distruibution of the action label has been averaged to some extent and forming a natural decerelation for ABC_D subset.
 
 ## :chart_with_upwards_trend: Result
 
