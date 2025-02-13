@@ -261,7 +261,7 @@ def train(rank, args):
                 torch.save({
                     'model_state_dict': model.state_dict(),
                     'optimizer_state_dict': optimizer.state_dict()},
-                    f"./ckpt/model-{epoch_idx}-{training_mode}-{dataset_name}-2.pt")
+                    f"./ckpt/model-{epoch_idx}-{training_mode}-{dataset_name}.pt")
                 print("saving complete!")
             
     dist.destroy_process_group()
