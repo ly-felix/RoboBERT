@@ -100,8 +100,11 @@ def train(rank, args):
          
     elif training_mode == "second":
         print("resuming the training mode, reading the checkpoint...")
-        num_epochs = 5
-
+        if dataset_name == "ABCD_D":
+            num_epochs = 5
+        if dataset_name == "ABC_D":
+            num_epochs = 15
+            
         model = DiffusionActionModel(
             vision_encoder = vision_encoder,
             pred_horizon = 16,
