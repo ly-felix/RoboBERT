@@ -78,7 +78,7 @@ Of course, we also provide the pertrained model for you to evaluate. For ABCD ->
 python evaluation_calvin.py --ckpt_path /to/your/ckpt/path/model-4-second-ABCD_D-best.pt --speed_factor 0.9
 python evaluation_calvin.py --ckpt_path /to/your/ckpt/path/model-14-second-ABC_D-best.pt
 ```
-Noting that the speed factor will decerelate the motion and obtain better performance for ABCD subset. The reason should be led by the application of mixup, the distruibution of the action label has been averaged to some extent and forming a natural decerelation for ABC_D subset.
+Noting that the speed factor will decerelate the motion and obtain better performance for ABCD subset. The reason why ABC do not need decerelation should be led by the application of mixup, the distruibution of the action label has been averaged to some extent and forming a natural decerelation for ABC_D subset.
 
 ## :chart_with_upwards_trend: Result
 
