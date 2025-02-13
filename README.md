@@ -1,5 +1,5 @@
 # RoboBERT
-This is the official implementation of RoboBERT, which is a novel end-to-end multiple-modality robotic operations training framework. It allows an instruction-following agent, switching the policy by natural language input. The model itself is an extension or improvement of the traditional CNN-based diffusion policy, adding some creative training methods. For examples, two-stage training separates learning of different modalities; data-augmentation reduces the reliance of extra data, etc. The training framework has been tested on changllenging CALVIN benchmark and get the SOTA comparing to models without using large pretraining or extra dataset on ABCD -> D. Additionally, it also only use the trajectories with language labels. Based on these reasons, the model is much more easily to train. The repository shows the training/testing source code for repeative experiments. If you want to learn more about this work, please check our paper. Thank you!
+This is the official implementation of RoboBERT, which is a novel end-to-end multiple-modality robotic operations training framework. It allows an instruction-following agent, switching the policy by natural language input. The model itself is an extension or improvement of the traditional CNN-based diffusion policy, adding some creative training methods. For examples, two-stage training separates learning of different modalities; data-augmentation reduces the reliance of extra data, etc. The training framework has been tested on changllenging CALVIN benchmark and get the SOTA comparing to models without using large pretraining or extra dataset on ABCD -> D. Additionally, it also only use the trajectories with language labels. Based on these reasons, the model is much more easily to train. The repository shows the training/testing source code for repeative experiments. If you want to learn more about this work, please check our [paper](https://arxiv.org/abs/2502.07837). Thank you!
 
 ## 	:eyes: Model Features
 
@@ -14,7 +14,7 @@ For reducing the learning difficulties, the NLP task and action task will be stu
   <img src="assets/two-stage.png" width="60%"/>
 </div>
 
-The data augmentation is quite important whe using the limited data for end-to-end training. The various data augmentation techiques are employed and demonstrated as follows. (a) are common techiques for CV tasks. (b) is mixup for robotic task. It worthy noting that not all data augmentations have the positive effect to the model. 
+The data augmentation is quite important whe using the limited data for end-to-end training. The various data augmentation techiques are employed and demonstrated as follows. (a) are common techiques for CV tasks. (b) is mixup for robotic task. It worthy noting that not all data augmentations have the positive effect to the model.
 <div align="center">
   <img src="assets/augmentation.png" width="65%"/>
 </div>
@@ -67,9 +67,15 @@ For evaulating the model, run the ```evaluation_calvin.py``` in the main path li
 
 ```bash
 cd ../..
-python evaluation_calvin.py --ckpt_path /home/wibot/SC/roboBert/my_models/DDP_training/ckpt/model-4-second-ABCD_D.pt
+python evaluation_calvin.py --ckpt_path /to/your/ckpt/path
 ```
-Of course, we also provide the pertrained model for you to evaluate. For ABCD -> D, downloading [checkpoint](https://drive.google.com/drive/folders/1W2wtwZttrp42VWHwgd7kWOXTBmgzigsz?usp=sharing).
+Of course, we also provide the pertrained model for you to evaluate. For ABCD -> D, downloading [checkpoint_ABCD_D](https://drive.google.com/drive/folders/1W2wtwZttrp42VWHwgd7kWOXTBmgzigsz?usp=sharing). For ABC -> D, downloading [checkpoint_ABC_D](https://drive.google.com/file/d/1f_9T6gY5Asmk12skKSdcgCczuWXmNScF/view?usp=sharing). Then, running the script like
+
+```bash
+python evaluation_calvin.py --ckpt_path /to/your/ckpt/path/model-4-second-ABCD_D-best.pt --speed_factor 0.9
+python evaluation_calvin.py --ckpt_path /to/your/ckpt/path/model-14-second-ABC_D-best.pt
+```
+Noting that the speed factor will decerelate the motion and obtain better performance for ABCD subset.
 
 ## :chart_with_upwards_trend: Result
 
