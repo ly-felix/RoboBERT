@@ -14,7 +14,8 @@ For reducing the learning difficulties, the NLP task and action task will be stu
   <img src="assets/two-stage.png" width="60%"/>
 </div>
 
-The data augmentation is quite important whe using the limited data for end-to-end training. The various data augmentation techiques are employed and demonstrated as follows. (a) are common techiques for CV tasks. (b) is mixup for robotic task. It worthy noting that not all data augmentations have the positive effect to the model.
+The data augmentation is quite important whe using the limited data for end-to-end training. The various data augmentation techiques are employed and demonstrated as follows. (a) are common techiques for CV tasks. (b) is mixup for robotic task. It worthy noting that not all data augmentations have the positive effect to the model like translation. In the latest experiment, Mixup is applied during the training of subset ABC_D so it don't need an explicit decerlation during evaluation. Mixup don't have an sigificant improvement for ABCD_D subset but it improve a lot for ABC_D subset and it always needs more epoches to get the best results so we don't use it for ABCD_D.
+
 <div align="center">
   <img src="assets/augmentation.png" width="65%"/>
 </div>
@@ -44,7 +45,9 @@ python sparate_action_data.py --dataset_name ABCD_D --sparate_mode language
 ```
 ```--sparate_mode language``` means only sparate the trajectories with language labels. During the training, the RGB observations and actions are read from original CALVIN and extracted file respectively. 
 
-You can also download the .pkl file we have prepared. Whatever which methods, you need modify the ```dataset_wo_image_path``` path in ```config_path.json``` to the path containing the corresponding pkl files. 
+You can also directly download the .pkl file we have prepared [ABC_D](https://drive.google.com/file/d/1Lplb7nAVspYo9wBsEk5axbF3_IULhekx/view?usp=sharing) and [ABCD_D](https://drive.google.com/file/d/1fQb2R0r9s2kfpa_M3FHXSV3KDWOFa9G5/view?usp=sharing).
+
+Whatever which methods, you need modify the ```dataset_wo_image_path``` path in ```config_path.json``` to the path containing the corresponding pkl files. 
 
 ### :weight_lifting_man: Training the Model
 After all the files mentioned are prepared and their pathes are modified in ```config_path.json```, we can train our model. Taking ABCD_D subset in CALVIN as an example, you need conduct the first-stage training by using standard language.
@@ -60,7 +63,7 @@ It will generate a checkpoint called ```model-9-first-ABCD_D.pt``` under the ```
 python training.py --world_size 2 --training_mode second --dataset_name ABCD_D --checkpoint ./model-9-first-ABCD_D.pt
 ```
 
-The final mode is output as ```model-4-second-ABCD_D.pt``` in ```ckpt``` folder.
+The final mode is output as ```model-4-second-ABCD_D.pt``` in ```ckpt``` folder. 
 
 ### :mechanical_arm: Evaluating the Model
 For evaulating the model, run the ```evaluation_calvin.py``` in the main path like
@@ -75,7 +78,7 @@ Of course, we also provide the pertrained model for you to evaluate. For ABCD ->
 python evaluation_calvin.py --ckpt_path /to/your/ckpt/path/model-4-second-ABCD_D-best.pt --speed_factor 0.9
 python evaluation_calvin.py --ckpt_path /to/your/ckpt/path/model-14-second-ABC_D-best.pt
 ```
-Noting that the speed factor will decerelate the motion and obtain better performance for ABCD subset.
+Noting that the speed factor will decerelate the motion and obtain better performance for ABCD subset. The reason should be led by the application of mixup, the distruibution of the action label has been averaged to some extent and forming a natural decerelation. 
 
 ## :chart_with_upwards_trend: Result
 
