@@ -104,6 +104,20 @@ The model is tested on CALVIN dataset. In the table, pretraining column means if
 | **RoboBERT(Ours)** | N | **0.953** | **0.857** | **0.754** | **0.663** | **0.562** | **3.79** |
 
 ### :robot: Real Robot Experiments
+
+Here demonstrates some indiviual tasks. There are stacking cubes, recovering pen and open the door.
+<div align="center">
+  <img src="assets/stacking_c 00_00_00-00_00_30.gif" width="80%"/>
+</div>
+<div align="center">
+  <img src="assets/penholder_c 00_00_00-00_00_30.gif" width="80%"/>
+</div>
+<div align="center">
+  <img src="assets/opendoor_c 00_00_00-00_00_30.gif" width="80%"/>
+</div>
+
+
+Here demonstrate some sequential tasks including transfer specified objects and operate articulated object.
 <div align="center">
   <img src="assets/cabinet operations_c.gif" width="80%"/>
 </div>
